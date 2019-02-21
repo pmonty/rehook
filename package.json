@@ -1,0 +1,28 @@
+{
+  "name": "redux-hooks",
+  "version": "1.0.0",
+  "description": "redux and hooks tutorial part 1",
+  "main": "index.js",
+  "author": "paul.montagna <paul.montagna@acurus.com.au>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/react": "^16.8.4",
+    "@types/react-dom": "^16.8.2",
+    "react": "^16.8.2",
+    "react-dom": "^16.8.2",
+    "webpack": "^4.29.5"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^5.2.1",
+    "clean-webpack-plugin": "^1.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "source-map-loader": "^0.2.4",
+    "typescript": "^3.3.3",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.1.14"
+  },
+  "scripts": {
+    "dev": "webpack-dev-server --mode development --open --hot --inline",
+    "build": "webpack --mode production"
+  }
+}
