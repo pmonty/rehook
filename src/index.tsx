@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useState } from "react";
 import * as ReactDOM from "react-dom";
 
 import Cart from "./containers/Cart";
@@ -10,7 +9,8 @@ class App extends React.Component<any, any> {
     super(props);
 
     this.state = {
-      item: {}
+      item: {},
+      quantity: 0
     };
   }
 

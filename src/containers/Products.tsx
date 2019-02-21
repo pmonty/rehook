@@ -1,18 +1,43 @@
 import * as React from "react";
 
-export default function Products(props: { setItemCallback: ({}) => void }) {
-  return (
-    <div>
-      <button
-        onClick={() => props.setItemCallback({ name: "Apple", price: 3 })}
-      >
-        Buy Apple
-      </button>
-      <button
-        onClick={() => props.setItemCallback({ name: "Banana", price: 5 })}
-      >
-        Buy Banana
-      </button>
-    </div>
-  );
+import Product from "../components/Product";
+
+import data from "../data/data";
+
+interface IProductsProps {
+  setItemCallback: ({}) => void;
+}
+
+export default class Products extends React.Component<IProductsProps, any> {
+  constructor(props: IProductsProps) {
+    super(props);
+
+    this.state = {
+      items: null
+    };
+  }
+
+  componentDidMount() {
+    this.setState({ items: data });
+  }
+
+  render() {
+    const { setItemCallback } = this.props;
+    const { items } = this.state;
+
+    return (
+      <div className="row">
+        {items &&
+          items.map((item: any) => {
+            return (
+              <Product
+                product={item}
+                callback={setItemCallback}
+                key={item.id}
+              />
+            );
+          })}
+      </div>
+    );
+  }
 }
