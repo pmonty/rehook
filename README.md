@@ -18,4 +18,5 @@ A shopping cart using hooks and redux
 
 ### Tutorial 3:
 
+- Testing our custom counter hook
 - Redux and FP techniques
