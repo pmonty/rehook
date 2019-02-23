@@ -1,43 +1,29 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 
 import Product from "../components/Product";
 
 import data from "../data/data";
 
 interface IProductsProps {
-  setItemCallback: ({}) => void;
+  callback: ({}) => void;
 }
 
-export default class Products extends React.Component<IProductsProps, any> {
-  constructor(props: IProductsProps) {
-    super(props);
+export default function Products(props: IProductsProps) {
+  let [items, setItems] = useState(null);
 
-    this.state = {
-      items: null
-    };
-  }
+  useEffect(() => {
+    setItems(data);
+  });
 
-  componentDidMount() {
-    this.setState({ items: data });
-  }
-
-  render() {
-    const { setItemCallback } = this.props;
-    const { items } = this.state;
-
-    return (
-      <div className="row">
-        {items &&
-          items.map((item: any) => {
-            return (
-              <Product
-                product={item}
-                callback={setItemCallback}
-                key={item.id}
-              />
-            );
-          })}
-      </div>
-    );
-  }
+  return (
+    <div className="row">
+      {items &&
+        items.map((item: any) => {
+          return (
+            <Product product={item} callback={props.callback} key={item.id} />
+          );
+        })}
+    </div>
+  );
 }
