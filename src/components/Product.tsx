@@ -1,48 +1,29 @@
 import * as React from "react";
+import { useState } from "react";
 
 interface IProductProps {
   product: any;
   callback: ({}) => void;
 }
 
-export default class Product extends React.Component<IProductProps, any> {
-  constructor(props: IProductProps) {
-    super(props);
+export default function Product(props: IProductProps) {
+  const { callback, product } = props;
+  const { name, price } = product;
 
-    this.state = {
-      quantity: 1
-    };
-  }
+  let [qty, setQuantity] = useState(1);
 
-  handleQuantityChange = (e: { target: HTMLInputElement }) => {
-    this.setState({ quantity: e.target.value });
-  };
+  return (
+    <div className="col-md-4">
+      <p>{name}</p>
+      <p>${price}</p>
+      <br />
 
-  handleQuantityIncDec = (inc: boolean) => {
-    const diff = inc ? 1 : -1;
-    this.setState((prevState: any) => ({
-      quantity: prevState.quantity + diff
-    }));
-  };
+      <button onClick={() => setQuantity(--qty)}>-</button>
+      <input value={qty} disabled />
+      <button onClick={() => setQuantity(++qty)}>+</button>
+      <br />
 
-  render() {
-    const { quantity } = this.state;
-    const { callback, product } = this.props;
-    const { name, price } = product;
-
-    return (
-      <div className="col-md-4">
-        <p>{name}</p>
-        <p>${price}</p>
-        <br />
-        <button onClick={() => this.handleQuantityIncDec(false)}>-</button>
-        <input value={quantity} onChange={this.handleQuantityChange} disabled />
-        <button onClick={() => this.handleQuantityIncDec(true)}>+</button>
-        <br />
-        <button onClick={() => callback({ name, price, quantity })}>
-          Add To Cart
-        </button>
-      </div>
-    );
-  }
+      <button onClick={() => callback({ ...product, qty })}>Add To Cart</button>
+    </div>
+  );
 }

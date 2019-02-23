@@ -1,34 +1,25 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 
-export default class Cart extends React.Component<any, any> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      items: []
-    };
-  }
+export default function Cart(props: any) {
+  let [items, setItems] = useState([]);
 
-  componentDidUpdate(prevProps: any) {
-    if (this.props.cartItem !== prevProps.cartItem) {
-      this.setState((prevState: any, props: any) => ({
-        items: [...prevState.items, props.cartItem]
-      }));
-    }
-  }
+  useEffect(() => {
+    setItems([...items, props.cartItem]);
+  }, [props.cartItem]);
 
-  render() {
-    const { items } = this.state;
-
-    return (
-      <div>
-        <ul>
-          {items.map((item: any, i: number) => (
-            <li key={item.price + Math.random() * i}>
-              {item.name} - ${item.price * item.quantity}
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <ul>
+        {items.map(
+          (item: any) =>
+            item.id && (
+              <li key={item.id}>
+                {item.name} - ${item.price * item.qty}
+              </li>
+            )
+        )}
+      </ul>
+    </div>
+  );
 }
